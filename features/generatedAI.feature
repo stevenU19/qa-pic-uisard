@@ -25,19 +25,22 @@ Característica: Autenticación de Usuarios en UISARD
   # ===================================================
   # --- ESCENARIOS ADICIONALES (GENERADOS POR IA) ---
   # ===================================================
-  Scenario 04: Ingreso de campos obligatorios.
+  Scenario 04: Error de servidor al intentar iniciar sesión.
+  Given que el Empleado UIS intenta iniciar sesión con una contraseña inválida
+  When el Empleado UIS es redirigido al servidor de error
+  Then se muestra un mensaje de error de conexión.
+  
+  Scenario 05: Validación de campo obligatorio del nombre de usuario.
+  Given que el Empleado UIS no completa el campo de nombre de usuario
+  When el Empleado UIS intenta iniciar sesión
+  Then se muestra un mensaje de error de formato de campo.
+  
+  Scenario 06: Cambio de rol a Empleado UIS con información incorrecta.
+  Given que el Empleado UIS se encuentra en el home de UISARD con información incorrecta
+  When el Empleado UIS intenta cambiar su rol actual por Empleado UIS
+  Then se muestra un mensaje de error de invalidación de rol.
+  
+  Scenario 07: Error de red en la autenticación.
   Given que el Empleado UIS se encuentra en la pantalla del login de UISARD
-  When el Empleado UIS dejará de ingresar sus credenciales
-  Then el Sistema debe mostrar un mensaje de error de llenado de campos obligatorios.
-  
-  Scenario 05: Acceso a la interfaz con conexión a la base de datos.
-  Given que el Empleado UIS se encuentra en la pantalla del login de UISARD y la base de datos está disponible
-  When el Empleado UIS se loguea correctamente
-  Then el Sistema debe mostrar la interfaz principal de UISARD con datos de la base de datos.
-  
-  Scenario 06: Acceso a la interfaz con error de servidor.
-  Given que el Empleado UIS se encuentra en la pantalla del login de UISARD y el servidor está en mantenimiento
-  When el Empleado UIS se loguea correctamente
-  Then el Sistema debe mostrar un mensaje de error de conexión al servidor.
-  
-  test_data": {
+  When el Empleado UIS da clic en el botón de inicio de sesión y la conexión se vuelve errática
+  Then se muestra un mensaje de error de conexión.
