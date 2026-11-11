@@ -6,7 +6,7 @@
 [![Node.js](https://img.shields.io/badge/Node.js->=18.0.0-green.svg)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 
-Arquitectura de automatización de pruebas de software asistida por Inteligencia Artificial local y RAG (*Retrieval-Augmented Generation*). Transforma Historias de Usuario en especificaciones BDD (Gherkin), genera casos borde de forma asistida, extrae parámetros técnicos y ejecuta pruebas de regresión funcionales E2E sobre el sistema **UISARD** sin depender de APIs en la nube ni costos de licenciamiento.
+Arquitectura de automatización de pruebas de software asistida por Inteligencia Artificial local y RAG (*Retrieval-Augmented Generation*). Transforma Historias de Usuario en especificaciones BDD, genera casos borde de forma asistida, extrae parámetros técnicos y ejecuta pruebas de regresión funcionales E2E sobre el sistema **UISARD** sin depender de APIs en la nube ni costos de licenciamiento.
 
 ---
 
@@ -15,8 +15,8 @@ Arquitectura de automatización de pruebas de software asistida por Inteligencia
 - **Soberanía y Privacidad de Datos:** Inferencia 100% on-premise utilizando **Ollama** (`llama3.2:3b`). Ningún dato de prueba o requerimiento sale de la infraestructura local.
 - **RAG Local Desacoplado:** Ingesta de Historias de Usuario en formato Markdown/PDF sin necesidad de motores de bases de datos pesados para la fase inicial.
 - **Enfoque BDD Híbrido:**
-  - **Determinista (QA):** Extracción exacta mediante expresiones regulares de los criterios de aceptación y escenarios base definidos por el analista (Scenario 01 al 04).
-  - **Asistido (IA):** Generación automática de casos límite, valores negativos y pruebas de robustez (Scenario 05+).
+  - **Determinista (QA):** Extracción exacta mediante expresiones regulares de los criterios de aceptación y escenarios base definidos por el analista QA.
+  - **Asistido (IA):** Generación automática de casos límite, valores negativos y pruebas de robustez
 - **Ejecución E2E Robusta con Playwright:**
   - Sincronización asíncrona adaptada a interfaces en Angular Material.
   - Manejo en segundo plano de políticas y banners de cookies mediante `addLocatorHandler`.
@@ -27,19 +27,21 @@ Arquitectura de automatización de pruebas de software asistida por Inteligencia
 ### 📂 Estructura del Repositorio
 ```text
 qa-pic-uisard/
-├── docs/
-│   └── HU-01-Login.md             # Requerimiento formal e Historia de Usuario
-├── features/
-│   └── generatedAI.feature        # Especificación BDD Gherkin generada (Híbrida)
-├── tests/
-│   ├── context_ai.json            # Parámetros técnicos desacoplados (URL, credenciales)
-│   └── login.spec.ts              # Script de prueba E2E en Playwright
-├── orchestrador.ts                # Orquestador central del pipeline
-├── types.ts                       # Contratos e interfaces de datos (TypeScript)
-├── playwright.config.ts           # Configuración del motor de pruebas E2E
-├── tsconfig.json                  # Configuración estricta de compilación TS
-├── package.json                   # Dependencias y scripts del proyecto
-└── .gitignore                     # Exclusión de node_modules y reportes locales
+|-- docs/
+|   |-- HU-01-Login.md             # Requerimiento formal y criterios de aceptación
+|-- features/
+|   |-- generatedAI.feature        # [Generado] Especificación BDD hibrida (QA + IA)
+|-- node_modules/                  # Librerías
+|-- test-results/                  # Resultados del test
+|-- tests/
+|   |-- context_ai.json            # [Generado] Datos técnicos (URL, roles)
+|   |-- login.spec.ts              # Script E2E en Playwright tipado en TypeScript
+|   |-- execution_report.json      # [Generado] Métricas detalladas de ejecución
+|-- orchestrador.ts                # Orquestador del pipeline (RAG + Ollama + Runner)
+|-- package.json                   # Definición de scripts y dependencias npm
+|-- playwright.config.ts           # Configuración del motor de pruebas (slowMo, timeouts)
+|-- tsconfig.json                  # Configuración del compilador TypeScript
+|-- .gitignore                     # Exclusión de node_modules y capturas temporales
 ```
 
 ### 🏗️ Arquitectura del Pipeline
