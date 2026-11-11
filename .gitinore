@@ -1,0 +1,13 @@
+
+# Dependencias
+node_modules/
+
+# Artefactos temporales y evidencias de Playwright
+test-results/
+playwright-report/
+tests/execution_report.json
+tests/context_ai.json
+
+# Archivos de entorno y logs
+.env
+npm-debug.log*

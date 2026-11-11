@@ -1,0 +1,6 @@
+{
+  "url": "https://rsi.uis.edu.co/develop/auth/#/auth/login",
+  "username": "kjgomezj",
+  "password": "123456",
+  "expected_route": "https://rsi.uis.edu.co/develop/auth/#/auth/home"
+}
